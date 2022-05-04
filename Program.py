@@ -152,8 +152,7 @@ def main():
 
 
 def run(log_file, dir, stream_path, datatypes_path, k, l, c, eps, b, delta, dist_thr, cd_thr, cd_conf, noise_thr):
-    logging.basicConfig(filename=log_file,
-                        filemode='w',
+    logging.basicConfig( filemode='w',
                         stream=sys.stdout,
                         level=logging.INFO,
                         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
