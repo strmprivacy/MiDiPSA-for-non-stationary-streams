@@ -48,7 +48,7 @@ class ExternalProcesses(object):
         :param args: Arguments of the process call
         :return: List of command arguments
         """
-        for name, value in args.items():
+        for name, value in list(args.items()):
             # Type of process call (e.g., Java call)
             if name == 'p_type':
                 a = ['java', '-Xmx8G', '-cp']

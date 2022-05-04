@@ -3,11 +3,10 @@ from abc import ABCMeta, abstractmethod
 from PerformanceEstimators.AEstimator import AEstimator
 
 
-class AInfoLossMetric(AEstimator):
+class AInfoLossMetric(AEstimator, metaclass=ABCMeta):
     """
     Abstract class implementing Generic Information loss estimators
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         super(AInfoLossMetric, self).__init__()

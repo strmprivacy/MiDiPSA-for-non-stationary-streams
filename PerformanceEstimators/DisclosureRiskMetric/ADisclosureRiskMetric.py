@@ -3,11 +3,10 @@ from abc import ABCMeta, abstractmethod
 from PerformanceEstimators.AEstimator import AEstimator
 
 
-class ADisclosureRiskMetric(AEstimator):
+class ADisclosureRiskMetric(AEstimator, metaclass=ABCMeta):
     """
     Abstract class implementing disclosure risk estimators
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         super(ADisclosureRiskMetric, self).__init__()

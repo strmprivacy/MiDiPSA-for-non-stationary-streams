@@ -80,10 +80,10 @@ class StreamReader(object):
         StreamReader.STREAM_METADATA = self.change_dtypes(df, self.__datatypes_path)
 
         # Determine whether all attributes are numeric or nominal, for efficient future processing
-        dtypes = [StreamReader.STREAM_METADATA[key]['Type'] for key in StreamReader.STREAM_METADATA.keys()[0:-1]]
+        dtypes = [StreamReader.STREAM_METADATA[key]['Type'] for key in list(StreamReader.STREAM_METADATA.keys())[0:-1]]
 
-        MetaUtils.stream_metadata = StreamReader.STREAM_METADATA.values()
-        MetaUtils.stream_attr_names = StreamReader.STREAM_METADATA.keys()
+        MetaUtils.stream_metadata = list(StreamReader.STREAM_METADATA.values())
+        MetaUtils.stream_attr_names = list(StreamReader.STREAM_METADATA.keys())
         MetaUtils.check_is_all_nominal = all(v == 'categorical' for v in dtypes)
         MetaUtils.is_all_numeric = all(v == 'numeric' for v in dtypes)
 
@@ -94,8 +94,8 @@ class StreamReader(object):
                          " Sensitive attribute is '%s' (%s)" %
                          (Counter(dtypes)['numeric'],
                           Counter(dtypes)['categorical'],
-                          StreamReader.STREAM_METADATA.keys()[-1],
-                          StreamReader.STREAM_METADATA[StreamReader.STREAM_METADATA.keys()[-1]]['Type']))
+                          list(StreamReader.STREAM_METADATA.keys())[-1],
+                          StreamReader.STREAM_METADATA[list(StreamReader.STREAM_METADATA.keys())[-1]]['Type']))
         return StreamReader.STREAM_METADATA
 
     def parse_lines(self, lines):
@@ -173,7 +173,7 @@ class StreamReader(object):
                                           'Max_Val': (lambda: row['Max_Val']
                                                        if not np.math.isnan(row['Max_Val']) else None)(),
                                           'Distinct_Val': (lambda: row['Distinct_Val'][1:-1].split(',')
-                                                       if isinstance(row['Distinct_Val'], basestring) else None)(),
+                                                       if isinstance(row['Distinct_Val'], str) else None)(),
                                           'Mean': (lambda: df[row['Feature']].mean()
                                                        if not row['Type'] == 'categorical' else None)(),
                                           'std': (lambda: df[row['Feature']].std()

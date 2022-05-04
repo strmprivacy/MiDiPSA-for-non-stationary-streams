@@ -2,11 +2,10 @@ import logging
 from abc import ABCMeta, abstractmethod
 
 
-class AConceptDriftDetector(object):
+class AConceptDriftDetector(object, metaclass=ABCMeta):
     """
     Abstract class of concept drift detector
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self, conf):
         self.logger = logging.getLogger(__name__)

@@ -1,11 +1,10 @@
 from abc import ABCMeta, abstractmethod
 
 
-class ANoiseGenerator(object):
+class ANoiseGenerator(object, metaclass=ABCMeta):
     """
     Abstract class for initializing noiser for satisfying differential privacy
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self, k, eps, noise_thr):
         """

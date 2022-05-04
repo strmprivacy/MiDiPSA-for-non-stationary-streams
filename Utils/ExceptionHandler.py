@@ -108,10 +108,10 @@ class ExceptionHandler(object):
         :return: Stack local variables
         """
         print("--------------------------------------------")
-        print "{:<15} | {:<10}".format('Variable', 'Value')
+        print(("{:<15} | {:<10}".format('Variable', 'Value')))
         print("--------------------------------------------")
-        for k, v in inspect.trace()[-1][0].f_locals.iteritems():
-            print "{:<15} | {:<10}".format(k, v)
+        for k, v in list(inspect.trace()[-1][0].f_locals.items()):
+            print(("{:<15} | {:<10}".format(k, v)))
 
     @staticmethod
     def handle_exception(handler, *exceptions):

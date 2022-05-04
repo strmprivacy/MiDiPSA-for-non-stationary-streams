@@ -3,11 +3,10 @@ from abc import ABCMeta, abstractmethod
 from PerformanceEstimators.AEstimator import AEstimator
 
 
-class AExecutionTimeMetric(AEstimator):
+class AExecutionTimeMetric(AEstimator, metaclass=ABCMeta):
     """
     Abstract class implementing Generic Execution Time estimators
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         super(AExecutionTimeMetric, self).__init__()

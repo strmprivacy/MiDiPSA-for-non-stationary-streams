@@ -4,7 +4,7 @@ from Anonymizer.AAnonymizer import AAnonymizer
 
 
 class KNNAnonymizer(AAnonymizer):
-    MOA_PATH = 'C:\Users\micha\Desktop\moa-release-2013.11\moa-release-2013.11'
+    MOA_PATH = 'C:\\Users\micha\Desktop\moa-release-2013.11\moa-release-2013.11'
 
     def __init__(self, stream_path, data_name, evaluation_path, output_path, k, e, b):
         self.stream_path = stream_path

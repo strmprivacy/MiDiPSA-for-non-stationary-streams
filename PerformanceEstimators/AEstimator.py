@@ -2,9 +2,7 @@ import logging
 from abc import ABCMeta, abstractmethod
 
 
-class AEstimator(object):
-    __metaclass__ = ABCMeta
-
+class AEstimator(object, metaclass=ABCMeta):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self.processed_instances = 0

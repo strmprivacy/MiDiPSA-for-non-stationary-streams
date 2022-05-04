@@ -1,12 +1,11 @@
 from abc import ABCMeta, abstractmethod
 
 
-class ANoiseEstimator(object):
+class ANoiseEstimator(object, metaclass=ABCMeta):
     """
     Abstract class for estimation the range (scale) of noise to be added,
     and return the estimated noise.
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         pass

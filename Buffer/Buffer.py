@@ -1,4 +1,4 @@
-from BufferQueue import BufferQueue
+from .BufferQueue import BufferQueue
 from Instances.Record import Record
 from Utils.MetricsUtils import MetricsUtils
 

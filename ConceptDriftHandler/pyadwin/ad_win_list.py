@@ -21,7 +21,7 @@ class AdWinList(object):
 
     def removeFromHead(self):
         temp = self.head
-        self.head = self.head.next
+        self.head = self.head.__next__
         if self.head is not None:
             self.head.prev = None
         else:

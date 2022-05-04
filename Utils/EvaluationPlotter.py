@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.nonparametric.smoothers_lowess import lowess
 
-REPORT_DIR = 'C:\Users\micha\PycharmProjects\MiDiPSA\Incremental Evaluation\\'
+REPORT_DIR = 'C:\\Users\micha\PycharmProjects\MiDiPSA\Incremental Evaluation\\'
 
 
 class EvaluationPlotter:
@@ -61,7 +61,7 @@ class EvaluationPlotter:
                         yscale=None):
         combined_df = pd.DataFrame()
         if not os.path.exists(eval_dir) or os.listdir(eval_dir) == []:
-            print("Could not locate evaluation files in specified directory: {0}".format(eval_dir))
+            print(("Could not locate evaluation files in specified directory: {0}".format(eval_dir)))
         else:
             if group_by == 'k':
                 combined_df = self.read_evaluation_files(eval_dir, dataset, k='*', eps=eps, l=l, estimator=estimator)

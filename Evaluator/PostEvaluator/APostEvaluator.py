@@ -2,9 +2,7 @@ import logging
 from abc import ABCMeta, abstractmethod
 
 
-class APostEvaluator(object):
-    __metaclass__ = ABCMeta
-
+class APostEvaluator(object, metaclass=ABCMeta):
     def __init__(self):
         self.logger = logging.getLogger(__name__)
 

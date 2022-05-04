@@ -189,9 +189,9 @@ class Cluster(object):
         :return: True if cluster satisfies l-diversity, otherwise False.
         """
         # frequency distribution of values in sensitive attr
-        sensitive_dict = self.categorical_freq[self.categorical_freq.keys()[-1]]
+        sensitive_dict = self.categorical_freq[list(self.categorical_freq.keys())[-1]]
 
-        count_distinct_values = len(sensitive_dict.keys())
+        count_distinct_values = len(list(sensitive_dict.keys()))
         return count_distinct_values >= self.l_diversity
 
     def check_recursive_diversity(self):
@@ -205,11 +205,11 @@ class Cluster(object):
         c, l = self.recursive_cl_diversity
 
         # frequency distribution of values in sensitive attr
-        sensitive_dict = self.categorical_freq[self.categorical_freq.keys()[-1]]
+        sensitive_dict = self.categorical_freq[list(self.categorical_freq.keys())[-1]]
 
         sorted_values = sorted(sensitive_dict, key=sensitive_dict.get, reverse=True)
         r1 = sensitive_dict[sorted_values[0]]
-        for i in range(l-1, len(sensitive_dict.keys())):
+        for i in range(l-1, len(list(sensitive_dict.keys()))):
             rl_to_rm += sensitive_dict[sorted_values[i]]
         return r1 < c * rl_to_rm
 
@@ -220,11 +220,11 @@ class Cluster(object):
         :return: True if cluster satisfies entropy-diversity, otherwise False.
         """
         # frequency distribution of values in sensitive attr
-        sensitive_dict = self.categorical_freq[self.categorical_freq.keys()[-1]]
+        sensitive_dict = self.categorical_freq[list(self.categorical_freq.keys())[-1]]
 
         total = sum(sensitive_dict.values())
-        prob_dict = {key: float(value) / total for (key, value) in sensitive_dict.items()}
-        p_data = Series(prob_dict.values())  # calculates the probabilities
+        prob_dict = {key: float(value) / total for (key, value) in list(sensitive_dict.items())}
+        p_data = Series(list(prob_dict.values()))  # calculates the probabilities
         entropy = stats.entropy(p_data, base=2)  # input probabilities to get the entropy
         return entropy > np.log2(self.l_diversity)
 

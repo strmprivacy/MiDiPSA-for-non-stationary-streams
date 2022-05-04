@@ -1,4 +1,4 @@
-from __future__ import division
+
 import numpy as np
 from numpy import random
 from scipy.spatial.distance import pdist, cdist

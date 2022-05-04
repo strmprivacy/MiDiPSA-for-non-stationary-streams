@@ -60,7 +60,7 @@ class MetricsUtils(object):
         :return: Nominal distance
         """
         p = len(x)
-        m = sum(map(lambda (a, b): 0 if a == b else 1, zip(x, y)))
+        m = sum([0 if a_b[0] == a_b[1] else 1 for a_b in zip(x, y)])
         return float(p - m) / p
 
     @staticmethod
@@ -210,7 +210,7 @@ class MetricsUtils(object):
         :return: Centroid vector of records.
         """
         centr = []
-        vectors = map(lambda x: x.quasi_identifier, records)
+        vectors = [x.quasi_identifier for x in records]
         zipped = list(zip(*vectors))
         for l in zipped:
             if isinstance(l[0], str):

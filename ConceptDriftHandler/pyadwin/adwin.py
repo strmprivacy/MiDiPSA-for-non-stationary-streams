@@ -33,15 +33,15 @@ class Adwin(object):
     def printInfo(self):
         it = self.bucketList.tail
         if it is None:
-            print "It None"
+            print("It None")
 
         i = self.lastBucketRow
 
         while True:
             for k in range(it.size - 1, -1, -1):
-                print str(i) + " [" + str(it.sum[k]) + " de " + str(self.bucketSize(i)) + "],",
+                print(str(i) + " [" + str(it.sum[k]) + " de " + str(self.bucketSize(i)) + "],", end=' ')
 
-            print
+            print()
             it = it.prev
             i -= 1
             if it is None:
@@ -70,10 +70,10 @@ class Adwin(object):
         while True:
             k = cursor.size
             if k == self.MAXBUCKETS + 1:
-                nextNode = cursor.next
+                nextNode = cursor.__next__
                 if nextNode is None:
                     self.bucketList.addToTail()
-                    nextNode = cursor.next
+                    nextNode = cursor.__next__
                     self.lastBucketRow += 1
                 n1 = self.bucketSize(i)
                 n2 = self.bucketSize(i)
@@ -87,7 +87,7 @@ class Adwin(object):
                     break
             else:
                 break
-            cursor = cursor.next
+            cursor = cursor.__next__
             i += 1
             if cursor is None:
                 break

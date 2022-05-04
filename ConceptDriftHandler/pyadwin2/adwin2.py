@@ -1,7 +1,7 @@
 """Adaptive Sliding Window"""
 
 # Author: Yuhao ZHAO
-from adwin_list import AdwinList
+from .adwin_list import AdwinList
 from math import log, sqrt, fabs
 
 
@@ -62,10 +62,10 @@ class Adwin2:
             k = cursor.bucket_size_row
             # Merge buckets if row is full
             if k == self.max_buckets + 1:
-                next_node = cursor.next
+                next_node = cursor.__next__
                 if next_node is None:
                     self.list_row_buckets.add_to_tail()
-                    next_node = cursor.next
+                    next_node = cursor.__next__
                     self.last_bucket_row += 1
 
                 n1 = pow(2, i)
@@ -82,7 +82,7 @@ class Adwin2:
                     break
             else:
                 break
-            cursor = cursor.next
+            cursor = cursor.__next__
             i += 1
 
     def __reduce_window(self):

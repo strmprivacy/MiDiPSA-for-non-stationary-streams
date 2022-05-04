@@ -42,7 +42,7 @@ class ClassificationInfoLossMetric(AInfoLossMetric):
         label = record_pair.anonymized_record.sensitive_attr
 
         # frequency distribution of values in sensitive attr
-        sensitive_dict = cluster.categorical_freq[cluster.categorical_freq.keys()[-1]]
+        sensitive_dict = cluster.categorical_freq[list(cluster.categorical_freq.keys())[-1]]
         common_value = max(sensitive_dict, key=sensitive_dict.get)
         if record_pair.status == 1 or record_pair.status == 2 or common_value != label:
             self.__penalties_sum += 1

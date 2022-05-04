@@ -7,11 +7,10 @@ from Utils.MetaUtils import MetaUtils
 from Utils.MetricsUtils import MetricsUtils
 
 
-class APublisher:
+class APublisher(metaclass=ABCMeta):
     """
     Abstract class of publisher
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
@@ -73,7 +72,7 @@ class APublisher:
                 if not w:
                     qi[i] = DistributionUtils.get_uniform_rand(min=min_val, max=max_val, dtype=type(qi[i]))
                 else:
-                    records = map(lambda x: x.quasi_identifier, w)
+                    records = [x.quasi_identifier for x in w]
                     attr_vals = list(zip(*records))[i]
                     x = DistributionUtils.get_estimated_rand(sample_batch=attr_vals, dtype=type(qi[i]))
                     qi[i] = MetricsUtils.truncate_value(x, l=min_val, u=max_val, dtype=type(qi[i]))

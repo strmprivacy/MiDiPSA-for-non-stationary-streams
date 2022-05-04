@@ -1,4 +1,4 @@
-from ANoiseGenerator import ANoiseGenerator
+from .ANoiseGenerator import ANoiseGenerator
 from Noiser.RangeEstimator.CategoricalRangeEstimator import CategoricalNoiseEstimator
 from Noiser.RangeEstimator.LaplaceDomainRangeEstimator import LaplaceDomainNoiseEstimator
 from Utils.ExceptionHandler import ExceptionHandler

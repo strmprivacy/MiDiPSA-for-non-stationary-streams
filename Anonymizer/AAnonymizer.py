@@ -2,11 +2,10 @@ from abc import ABCMeta, abstractmethod
 import sys
 
 
-class AAnonymizer(object):
+class AAnonymizer(object, metaclass=ABCMeta):
     """
     Abstract class of anonymizer object
     """
-    __metaclass__ = ABCMeta
 
     def __init__(self, stream, k, l, c, eps, datatypes, publisher):
         """

@@ -198,7 +198,7 @@ class EvaluationReport(object):
         Save full report to a designated folder containing execution performance results in CSV format
         :return: True if writing is successful, otherwise False
         """
-        csv_header = [key for key in self.params.iterkeys()]
+        csv_header = [key for key in list(self.params.keys())]
         data = [self.params]
 
         self.logger.info("Writing evaluation report to CSV file in path: %s%s" %
@@ -216,7 +216,7 @@ class EvaluationReport(object):
         l = self.params['L-Diversity']
 
         # performance over time of estimators: SSE/MSE info loss, disclosure risk, relative error, publishing delay
-        for estimator_name, estimator in self.estimators.iteritems():
+        for estimator_name, estimator in list(self.estimators.items()):
             if estimator.metric_over_time:
                 df = pd.DataFrame.from_records(estimator.metric_over_time, columns=['time', estimator_name])
 

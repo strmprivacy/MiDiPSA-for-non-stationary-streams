@@ -87,7 +87,7 @@ class ClassifierEvaluator(APostEvaluator):
 
         measures_dict = self.get_eval_measures(output=out_path,
                                                measures=ClassifierEvaluator.MEASUREMENTS)
-        self.logger.info(", ".join(['{}={}'.format(*p) for p in measures_dict.items()]))
+        self.logger.info(", ".join(['{}={}'.format(*p) for p in list(measures_dict.items())]))
 
         self.logger.info("Subprocess output is written to: %s" % out_path)
 

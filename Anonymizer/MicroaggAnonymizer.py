@@ -182,7 +182,7 @@ class MicroaggAnonymizer(AAnonymizer):
                 if dist <= self.dist_thr:
                     cluster_dist_dict[c] = dist
             if len(cluster_dist_dict) > 0:
-                cluster_dist_dict = sorted(cluster_dist_dict.items(), key=lambda x: x[1])
+                cluster_dist_dict = sorted(list(cluster_dist_dict.items()), key=lambda x: x[1])
                 return self.check_min_info_loss_increase(cluster_dist_dict, t)
                 # return cluster_dist_dict[0][0]
             return None
@@ -208,7 +208,7 @@ class MicroaggAnonymizer(AAnonymizer):
             cluster_error_dict[c] = incremental_error
 
         if len(cluster_dist_dict) > 0:
-            item_list = cluster_error_dict.items()
+            item_list = list(cluster_error_dict.items())
             cluster_error_dict = sorted(item_list, key=lambda x: x[1])
             return cluster_error_dict[0][0][0]
         return None

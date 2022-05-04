@@ -122,7 +122,7 @@ def main():
                         dir=DIR,
                         stream_path=stream_path,
                         datatypes_path=datatypes_path,
-                        k=range(k, 4 * k),
+                        k=list(range(k, 4 * k)),
                         l=l,
                         c=c,
                         eps=e,
@@ -181,7 +181,7 @@ def run(log_file, dir, stream_path, datatypes_path, k, l, c, eps, b, delta, dist
         assert (delta >= k[0])
         assert (k[0] <= b <= k[-1] + 1)
     except AssertionError:
-        print("Size of buffer should be between {0} and {1}".format(k[0], k[-1] + 1))
+        print(("Size of buffer should be between {0} and {1}".format(k[0], k[-1] + 1)))
         exit(1)
 
     anonymizer = MicroaggAnonymizer(stream=fs.tuples,
@@ -237,8 +237,8 @@ def run(log_file, dir, stream_path, datatypes_path, k, l, c, eps, b, delta, dist
     logging.info("Performing post-analysis evaluation using stream classifier")
 
     for learner in classification_learner:
-        task = classification_task.keys()[0]
-        evaluator = classification_evaluation.keys()[0]
+        task = list(classification_task.keys())[0]
+        evaluator = list(classification_evaluation.keys())[0]
         classifier = ClassifierEvaluator(task=(task, classification_task[task]),
                                          learner=(learner, classification_learner[learner]),
                                          evaluator=(evaluator, classification_evaluation[evaluator]))
