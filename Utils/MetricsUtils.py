@@ -47,7 +47,7 @@ class MetricsUtils(object):
 
             dist += MetricsUtils.distance_interval_feature(x[i], y[i], min_val, max_val, w) ** 2
 
-        return np.math.sqrt(dist / len(x) if not x else 1.0)
+        return np.nan if not x else np.math.sqrt(dist / len(x))
 
     @staticmethod
     # @ExceptionHandler.handle_exception(ExceptionHandler.halt_message)
