@@ -48,7 +48,7 @@ class StreamWriter(object):
         if os.path.isfile(path):
             has_header = True
 
-        with open(path, 'ab') as csvfile:
+        with open(path, 'a') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
             if not has_header:
                 writer.writeheader()
