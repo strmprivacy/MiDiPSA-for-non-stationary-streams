@@ -2,7 +2,7 @@ import logging
 import os
 import shutil
 import sys
-from Anonymizer.MicroaggAnonymizer import MicroaggAnonymizer
+
 from ConceptDriftHandler.ConceptDriftDetector import ConceptDriftDetector
 from Evaluator.EvaluationReport import EvaluationReport
 from Evaluator.PostEvaluator.ClassifierEvaluator import ClassifierEvaluator
@@ -11,15 +11,13 @@ from PerformanceEstimators.DisclosureRiskMetric.BufferedDisclosureRiskMetric imp
 from PerformanceEstimators.ExecutionTimeMetric.ExecutionTimeMetric import ExecutionTimeMetric
 from PerformanceEstimators.ExecutionTimeMetric.PublishingDelayTimeMetric import PublishingDelayTimeMetric
 from PerformanceEstimators.InfoLossMetric.ClassificationInfoLossMetric import ClassificationInfoLossMetric
-from PerformanceEstimators.InfoLossMetric.HomogeneityInfoLossMetric import HomogeneityInfoLossMetric
 from PerformanceEstimators.InfoLossMetric.MSEInfoLossMetric import MSEInfoLossMetric
-from PerformanceEstimators.InfoLossMetric.SSEInfoLossMetric import SSEInfoLossMetric
 from PerformanceEstimators.InfoLossMetric.RelativeErrorInfoLossMetric import RelativeErrorInfoLossMetric
-from Publisher.RandomizedPublisher import RandomizedPublisher
+from PerformanceEstimators.InfoLossMetric.SSEInfoLossMetric import SSEInfoLossMetric
 from Publisher.SmartCentroidPublisher import SmartCentroidPublisher
 from StreamHandler.StreamReader import StreamReader
 from Utils.MetricsUtils import MetricsUtils
-
+from Anonymizer.MicroaggAnonymizer import  MicroaggAnonymizer
 
 DIR = 'Datasets_small'
 

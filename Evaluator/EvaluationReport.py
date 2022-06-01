@@ -2,6 +2,7 @@ import glob
 import logging
 from collections import OrderedDict
 import os
+from os.path import join
 import pandas as pd
 from StreamHandler.StreamWriter import StreamWriter
 from Utils.MetaUtils import MetaUtils
@@ -14,10 +15,10 @@ class EvaluationReport(object):
 
     # Default values of directories and files
     # Directory to which the total values of the evaluation are written
-    EVAL_DIR = "Output\\Total_Evaluation\\"
+    EVAL_DIR = join("Output", "Total_Evaluation")
     # Directory to which incremental values (over time) of the evaluation are written
-    INCREMENTAL_EVAL_DIR = "Output\\Incremental_Evaluation\\"
-    REPORT = "Reports\\report3.csv"
+    INCREMENTAL_EVAL_DIR = join("Output", "Incremental_Evaluation")
+    REPORT = join("Reports", "report3.csv")
     ORIGINAL = 'original'
     ANONYMIZED = 'anonymized'
     ORIGINAL_CSV = 'original.csv'
@@ -36,7 +37,7 @@ class EvaluationReport(object):
         """
         self.logger = logging.getLogger(__name__)
         self.__dataset_name = dataset_name
-        self.EVAL_DIR += dataset_name
+        self.EVAL_DIR = join(self.EVAL_DIR, dataset_name)
         self.__anonymization_pairs = anonymization_pairs
         self.__anonymizer = anonymizer
         self.__stream_size = len(anonymization_pairs)
@@ -129,7 +130,7 @@ class EvaluationReport(object):
         csv_header = ["Original", "Anonymized"]
         data = [{"Original": str(pair.original_record), "Anonymized": str(pair.anonymized_record)} for pair in
                 self.anonymization_pairs]
-        self.logger.info("Writing record pairs [original, anonymized] to CSV file in path: %s\%s" %
+        self.logger.info("Writing record pairs [original, anonymized] to CSV file in path: %s/%s" %
                          (self.EVAL_DIR, self.ANONYMIZED_PAIRS))
         return StreamWriter.write_dict_to_CSV(self.EVAL_DIR, self.ANONYMIZED_PAIRS, csv_header, data)
 
@@ -140,9 +141,9 @@ class EvaluationReport(object):
         """
         status = self.print_records_to_CSV()
         if status:
-            self.logger.info("Writing original records to ARFF file in path: %s\%s" %
+            self.logger.info("Writing original records to ARFF file in path: %s/%s" %
                              (self.EVAL_DIR, self.ORIGINAL_ARFF))
-            self.logger.info("Writing original records to ARFF file in path: %s\%s" %
+            self.logger.info("Writing original records to ARFF file in path: %s/%s" %
                              (self.EVAL_DIR, self.ORIGINAL_ARFF))
 
             StreamWriter.convert_CSV_to_ARFF(self.EVAL_DIR, EvaluationReport.ORIGINAL_CSV)
@@ -163,9 +164,9 @@ class EvaluationReport(object):
         data_original = pd.DataFrame(original, columns=header)
         data_anonymized = pd.DataFrame(anonymized, columns=header)
 
-        self.logger.info("Writing original records to CSV file in path: %s\%s" %
+        self.logger.info("Writing original records to CSV file in path: %s/%s" %
                          (self.EVAL_DIR, self.ORIGINAL_CSV))
-        self.logger.info("Writing anonymized records to CSV file in path: %s\%s" %
+        self.logger.info("Writing anonymized records to CSV file in path: %s/%s" %
                          (self.EVAL_DIR, self.ANONYMIZED_CSV))
         return StreamWriter.write_df_to_CSV(self.EVAL_DIR, self.ORIGINAL_CSV, data_original) and \
                StreamWriter.write_df_to_CSV(self.EVAL_DIR, self.ANONYMIZED_CSV, data_anonymized)
@@ -202,8 +203,8 @@ class EvaluationReport(object):
         data = [self.params]
 
         self.logger.info("Writing evaluation report to CSV file in path: %s%s" %
-                         ('.\\', self.REPORT))
-        return StreamWriter.write_dict_to_CSV('.\\', self.REPORT, csv_header, data)
+                         ('.', self.REPORT))
+        return StreamWriter.write_dict_to_CSV(".", self.REPORT, csv_header, data)
 
     def print_incremental_eval_to_CSV(self):
         """
@@ -252,7 +253,7 @@ class EvaluationReport(object):
             filter_match = '{0}{1}_{2}_{3}_{4}_{5}.csv'.format(eval_dir, dataset, k, eps, l, estimator)
             for f in glob.glob(filter_match.replace('_', '*')):
                 i += 1
-                k, eps, l, estimator = f.split('\\')[-1].split('@')[-1].split('_')
+                k, eps, l, estimator = f.split(os.path.sep)[-1].split('@')[-1].split('_')
                 df = pd.read_csv(f)
                 if not df.columns[0] in combined_df:
                     combined_df['time'] = df.iloc[:, 0].values
