@@ -268,7 +268,10 @@ def run(log_file, dir, stream_path, datatypes_path, k, l, c, eps, b, delta, dist
     logging.shutdown()
     while logging.getLogger("").handlers:
         logging.getLogger("").handlers.pop()
-    shutil.move(log_file, os.path.abspath(os.path.join(eval_report.EVAL_DIR, log_file)))
+    try:
+        shutil.move(log_file, os.path.abspath(os.path.join(eval_report.EVAL_DIR, log_file)))
+    except:
+        pass
 
 
 if __name__ == "__main__":
