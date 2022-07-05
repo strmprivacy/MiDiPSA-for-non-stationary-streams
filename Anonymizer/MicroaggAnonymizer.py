@@ -71,7 +71,8 @@ class MicroaggAnonymizer(AAnonymizer):
 
         self.logger.info(
             'Algorithm parameters: k={0}, l={1}, c={2}, eps={3}, b={4}, delta={5}, dist_thr={6}, cd_thr={7}'.format(
-                (k[0], k[-1]), l, c, eps, b, delta, dist_thr, change_detector.cd_factor if change_detector else 'Disabled'))
+                (k[0], k[-1]), l, c, eps, b, delta, dist_thr,
+                change_detector.cd_factor if change_detector else 'Disabled'))
 
     @property
     def buff_size(self):
@@ -178,9 +179,9 @@ class MicroaggAnonymizer(AAnonymizer):
             for c in self.cluster_set:
                 centr = c.centroid.quasi_identifier
                 dist = MetricsUtils.distance(centr, t.quasi_identifier)
-
                 if dist <= self.dist_thr:
                     cluster_dist_dict[c] = dist
+
             if len(cluster_dist_dict) > 0:
                 cluster_dist_dict = sorted(list(cluster_dist_dict.items()), key=lambda x: x[1])
                 return self.check_min_info_loss_increase(cluster_dist_dict, t)
@@ -253,7 +254,7 @@ class MicroaggAnonymizer(AAnonymizer):
         """
         current_published = 0
         if c:
-            for t in c.W_curr.buffer: # if there exist unpublished tuples in the cluster
+            for t in c.W_curr.buffer:  # if there exist unpublished tuples in the cluster
                 if not t.is_published:
                     self.anonymization_pairs = self.publish(self.size, t, c, c.centroid.quasi_identifier)
                     current_published += 1

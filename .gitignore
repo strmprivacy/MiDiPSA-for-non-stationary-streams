@@ -2,3 +2,4 @@
 moa*
 uci/
 /.build
+*.pyc

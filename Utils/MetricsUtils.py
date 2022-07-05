@@ -145,7 +145,7 @@ class MetricsUtils(object):
     def distance_unbounded(x, y):
         dist = 0
         for i, v in enumerate(x):
-            if not isinstance(x[i], (int, float)):
+            if not isinstance(x[i], (np.int64, float)):
                 if x[i] != y[i]:
                     dist += 1
             else:
@@ -168,7 +168,7 @@ class MetricsUtils(object):
         length = len(x)
         pair_wise_list = list(zip(*[x, y]))
         for idx, pair in enumerate(pair_wise_list):
-            if isinstance(pair[0], (int, float)):  # numeric attribute
+            if isinstance(pair[0], (np.int64, float)):  # numeric attribute
                 min_val = MetaUtils.get_attr_metadata(idx, 'Min_Val')
                 max_val = MetaUtils.get_attr_metadata(idx, 'Max_Val')
                 if pair[0] != 0 or pair[1] != 0:
@@ -215,7 +215,7 @@ class MetricsUtils(object):
         for l in zipped:
             if isinstance(l[0], str):
                 centr.append(Counter(l).most_common(1)[0][0])
-            elif isinstance(l[0], (int, float)):
+            elif isinstance(l[0], (np.int64, float)):
                 centr.append(np.array(l).mean())
         return centr
 
@@ -234,7 +234,7 @@ class MetricsUtils(object):
         """
         centr = []
         for i, val in enumerate(old_centr):
-            if isinstance(val, (int, float)):
+            if isinstance(val, (np.int64, np.float)):
                 centr.append((val * size + new_record[i]) / (size + 1))
             elif isinstance(val, str):
                 mode = max(cat_counter[i], key=cat_counter[i].get)
